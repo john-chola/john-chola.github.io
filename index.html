@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>John Chola Portfolio</title>
+<meta name="description" content="John Chola, full-stack web developer and IT support specialist in Lusaka, Zambia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one left-aligned column, a two-part hero with a live queue ticket, projects as full-width rows */
+:root {
+  --bg: #F3F6F3;
+  --surface: #FFFFFF;
+  --ink: #13201A;
+  --muted: #56675F;
+  --line: #D8E0DA;
+  --accent: #A9501F;      /* copper */
+  --accent-ink: #FFFFFF;
+  --live: #1D7650;        /* status green */
+  --soft: #E8EEE9;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1512; --surface: #161F1B; --ink: #E6EDE9; --muted: #98A9A1; --line: #26332D;
+    --accent: #E8804A; --accent-ink: #1A0E07; --live: #52C48F; --soft: #1C2722;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1512; --surface: #161F1B; --ink: #E6EDE9; --muted: #98A9A1; --line: #26332D;
+  --accent: #E8804A; --accent-ink: #1A0E07; --live: #52C48F; --soft: #1C2722;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--ink);
+  font-family: var(--body); font-size: 1rem; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+.wrap {
+  max-width: 1120px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+@media (min-width: 720px) {
+  .wrap { padding-left: max(40px, env(safe-area-inset-left, 0px)); padding-right: max(40px, env(safe-area-inset-right, 0px)); }
+}
+
+h1, h2, h3 { font-family: var(--display); line-height: 1.1; margin: 0; text-wrap: balance; letter-spacing: -0.02em; }
+.label {
+  font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+}
+
+/* nav */
+.nav { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 24px; flex-wrap: wrap; }
+.brand { font-family: var(--display); font-weight: 800; font-size: 1.15rem; text-decoration: none; }
+.brand span { color: var(--accent); }
+.nav ul { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
+.nav ul a { text-decoration: none; color: var(--muted); font-weight: 500; font-size: 0.95rem; }
+.nav ul a:hover { color: var(--ink); }
+
+/* hero */
+.hero { display: grid; gap: 48px; padding-block: 40px 72px; align-items: center; }
+@media (min-width: 900px) { .hero { grid-template-columns: 1.35fr 1fr; padding-block: 64px 96px; } }
+.hero > * { min-width: 0; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.8rem; color: var(--live); }
+.status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--live); box-shadow: 0 0 0 4px color-mix(in srgb, var(--live) 20%, transparent); }
+.hero h1 { font-size: clamp(2.5rem, 6.5vw, 4.6rem); font-weight: 800; margin-top: 20px; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.lede { font-size: 1.15rem; color: var(--muted); max-width: 34em; margin: 24px 0 0; }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 999px;
+  font-weight: 600; text-decoration: none; border: 1px solid var(--line); background: var(--surface);
+  transition: transform .15s ease, border-color .15s ease;
+}
+.btn:hover { transform: translateY(-1px); border-color: var(--ink); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { border-color: var(--accent); }
+
+/* ticket */
+.ticket {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 28px;
+  box-shadow: 0 24px 48px -28px color-mix(in srgb, var(--ink) 35%, transparent);
+  max-width: 400px; width: 100%; justify-self: start;
+}
+@media (min-width: 900px) { .ticket { justify-self: end; transform: rotate(1.5deg); } }
+.ticket-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 18px; border-bottom: 1px dashed var(--line); }
+.ticket-code { font-family: var(--display); font-weight: 800; font-size: 3.5rem; line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.ticket-pos { font-size: 1.2rem; font-weight: 600; margin: 18px 0 4px; font-variant-numeric: tabular-nums; }
+.ticket-wait { color: var(--muted); margin: 0; font-variant-numeric: tabular-nums; }
+.dots { display: flex; gap: 6px; margin-top: 18px; flex-wrap: wrap; }
+.dots i { width: 22px; height: 6px; border-radius: 3px; background: var(--soft); transition: background .4s ease; }
+.dots i.done { background: var(--live); }
+.ticket-foot { display: flex; justify-content: space-between; gap: 12px; margin-top: 18px; padding-top: 14px; border-top: 1px dashed var(--line); font-family: var(--mono); font-size: 0.75rem; color: var(--muted); flex-wrap: wrap; }
+.ticket.turn .ticket-pos { color: var(--live); }
+
+/* sections */
+section { padding-block: 72px; border-top: 1px solid var(--line); }
+.sec-head { display: grid; gap: 12px; margin-bottom: 40px; max-width: 40em; }
+.sec-head h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 700; }
+.sec-head p { color: var(--muted); margin: 0; font-size: 1.05rem; }
+
+/* projects */
+.projects { display: grid; gap: 20px; }
+.project {
+  display: grid; gap: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 28px;
+}
+@media (min-width: 820px) { .project { grid-template-columns: 1fr 1.4fr; gap: 48px; padding: 36px; } }
+.project > * { min-width: 0; }
+.project h3 { font-size: 1.9rem; font-weight: 700; margin-top: 10px; }
+.project .kind { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.tag-team { font-family: var(--mono); font-size: 0.7rem; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.project p { margin: 0; }
+.project .summary { margin-top: 12px; color: var(--muted); }
+.links { display: flex; gap: 16px; margin-top: 20px; flex-wrap: wrap; }
+.links a { font-weight: 600; text-decoration: none; border-bottom: 2px solid var(--accent); padding-bottom: 1px; }
+.links a:hover { color: var(--accent); }
+.features { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.features li { padding-left: 22px; position: relative; }
+.features li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 10px; height: 2px; background: var(--accent); }
+.stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.stack span { font-family: var(--mono); font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; background: var(--soft); }
+
+/* services */
+.services { display: grid; gap: 20px; }
+@media (min-width: 760px) { .services { grid-template-columns: 1fr 1fr; } }
+.service { border-top: 3px solid var(--ink); padding-top: 20px; }
+.service h3 { font-size: 1.4rem; font-weight: 700; }
+.service ul { margin: 14px 0 0; padding-left: 18px; color: var(--muted); display: grid; gap: 6px; }
+
+/* skills */
+.skills { display: grid; gap: 0; }
+.skill-row { display: grid; gap: 8px; padding-block: 18px; border-bottom: 1px solid var(--line); }
+@media (min-width: 720px) { .skill-row { grid-template-columns: 200px 1fr; gap: 24px; align-items: baseline; } }
+.skill-row div { font-size: 1.05rem; }
+
+/* timeline */
+.timeline { display: grid; gap: 28px; max-width: 760px; }
+.entry { display: grid; gap: 6px; }
+@media (min-width: 720px) { .entry { grid-template-columns: 200px 1fr; gap: 24px; } }
+.entry h3 { font-size: 1.25rem; font-weight: 700; }
+.entry p { margin: 4px 0 0; color: var(--muted); }
+
+/* contact */
+.contact { padding-block: 88px; }
+.contact h2 { font-size: clamp(2.2rem, 5.5vw, 3.8rem); font-weight: 800; max-width: 14em; }
+.contact p { color: var(--muted); font-size: 1.1rem; max-width: 34em; margin: 20px 0 0; }
+footer { padding-block: 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.9rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  .btn:hover { transform: none; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav" aria-label="Main">
+    <a class="brand" href="#top">John Chola<span>.</span></a>
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero" id="top">
+    <div>
+      <span class="status">Available for freelance work</span>
+      <h1>I build web apps that work for <em>Zambian</em> communities.</h1>
+      <p class="lede">Full-stack web developer and IT support specialist in Lusaka. I've built a charcoal marketplace that works offline and in three languages, and a clinic queue that tells patients exactly how long they'll wait.</p>
+      <div class="actions">
+        <a class="btn primary" href="#work">See my work</a>
+        <a class="btn" href="https://github.com/john-chola" target="_blank" rel="noopener">GitHub profile ↗</a>
+      </div>
+    </div>
+
+    <aside class="ticket" id="ticket" aria-label="Example ticket from the Clinic Queue app">
+      <div class="ticket-top">
+        <div>
+          <div class="label">Your ticket</div>
+          <div class="ticket-code">A-024</div>
+        </div>
+        <div class="label" id="serving">Now serving A-018</div>
+      </div>
+      <p class="ticket-pos" id="pos" aria-live="polite">You are number 6</p>
+      <p class="ticket-wait" id="wait">about 25 minutes</p>
+      <div class="dots" id="dots" aria-hidden="true"></div>
+      <div class="ticket-foot"><span>Clinic Queue · example</span><span>General OPD</span></div>
+    </aside>
+  </header>
+</div>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">Selected work</span>
+      <h2>Projects</h2>
+      <p>Full-stack apps built from the database to the screen, deployed and running live.</p>
+    </div>
+
+    <div class="projects">
+      <article class="project">
+        <div>
+          <div class="kind"><span class="label">Final year project · 2026</span></div>
+          <h3>ZamMarket</h3>
+          <p class="summary">A progressive web app that connects charcoal sellers and buyers in Lusaka neighbourhoods. Sellers list by voice, buyers find trusted sellers nearby.</p>
+          <div class="links">
+            <a href="https://zam-market-khaki.vercel.app" target="_blank" rel="noopener">Live demo ↗</a>
+            <a href="https://github.com/john-chola/ZamMarket" target="_blank" rel="noopener">Source code ↗</a>
+          </div>
+        </div>
+        <div>
+          <ul class="features">
+            <li>Create listings by speaking in English, Nyanja or Bemba</li>
+            <li>Works offline: listings made without a connection post automatically when it returns</li>
+            <li>Real-time chat between buyers and sellers</li>
+            <li>Seller trust scores built from buyer ratings</li>
+            <li>Admin dashboard to verify sellers and moderate listings</li>
+          </ul>
+          <div class="stack"><span>React</span><span>Redux Toolkit</span><span>Node.js</span><span>Express</span><span>MongoDB Atlas</span><span>Socket.io</span><span>Cloudinary</span><span>PWA</span></div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div>
+          <div class="kind"><span class="label">Web app · 2026</span></div>
+          <h3>Clinic Queue</h3>
+          <p class="summary">Patients scan a QR code at the entrance, take a number, and watch their place in the queue live on their phone, so they can wait outside instead of guessing.</p>
+          <div class="links">
+            <a href="https://clinic-queue-pied.vercel.app/" target="_blank" rel="noopener">Live demo ↗</a>
+            <a href="https://github.com/john-chola/clinic-queue" target="_blank" rel="noopener">Source code ↗</a>
+          </div>
+        </div>
+        <div>
+          <ul class="features">
+            <li>Live position and wait estimate based on how fast patients are actually being seen</li>
+            <li>One-tap "Done · Next patient" for each consulting room</li>
+            <li>Waiting-room screen that chimes and reads numbers aloud</li>
+            <li>Reception adds walk-ins without smartphones and sets priority</li>
+            <li>Two rooms can never call the same patient, and public screens never show names</li>
+          </ul>
+          <div class="stack"><span>React</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>Socket.io</span><span>Jest</span></div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div>
+          <div class="kind"><span class="label">Mobile app · 2026</span></div>
+          <h3>Pact</h3>
+          <p class="summary">A mobile app for 7-day accountability sprints in groups of up to five developers. Check in daily, keep your streak, and build alongside friends.</p>
+          <div class="links">
+            <a href="https://github.com/john-chola/pact" target="_blank" rel="noopener">Source code ↗</a>
+          </div>
+        </div>
+        <div>
+          <ul class="features">
+            <li>Live group feed of daily check-ins and reactions</li>
+            <li>Streaks and sprint progress that can't be faked from the app</li>
+            <li>Daily reminders and push-notification nudges for quiet friends</li>
+            <li>Invite codes to create and join groups</li>
+          </ul>
+          <div class="stack"><span>React Native</span><span>Expo</span><span>TypeScript</span><span>Supabase</span><span>PostgreSQL</span></div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div>
+          <div class="kind"><span class="label">Web app · 2026</span><span class="tag-team">Team project</span></div>
+          <h3>Bookstore POS</h3>
+          <p class="summary">A point-of-sale system for bookstores with multiple branches, covering sales, stock, returns and staff roles.</p>
+          <div class="links">
+            <a href="https://github.com/Smart17-ui/Book_Store_POS" target="_blank" rel="noopener">Source code ↗</a>
+          </div>
+        </div>
+        <div>
+          <ul class="features">
+            <li>Sale processing with receipts and payment recording</li>
+            <li>Inventory tracking, stock adjustments and returns</li>
+            <li>Roles for owners, managers, cashiers and inventory staff</li>
+            <li>Sales and stock reports exported as PDF</li>
+          </ul>
+          <div class="stack"><span>Django REST Framework</span><span>React</span><span>Tailwind CSS</span><span>Pandas</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">What I can do for you</span>
+      <h2>Services</h2>
+    </div>
+    <div class="services">
+      <div class="service">
+        <h3>Web development</h3>
+        <ul>
+          <li>Full-stack web apps with React, Node.js and MongoDB</li>
+          <li>REST APIs with login and user roles</li>
+          <li>Real-time features: chat, live dashboards, notifications</li>
+          <li>Bug fixes and new features on existing sites</li>
+          <li>Deployment to Vercel and Render</li>
+        </ul>
+      </div>
+      <div class="service">
+        <h3>IT support</h3>
+        <ul>
+          <li>Remote troubleshooting of hardware and software problems</li>
+          <li>Software installation and system setup</li>
+          <li>Help for staff and users with everyday IT issues</li>
+          <li>Routine system maintenance</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">Toolkit</span>
+      <h2>Skills</h2>
+    </div>
+    <div class="skills">
+      <div class="skill-row"><span class="label">Languages</span><div>JavaScript · TypeScript · Python · Java · HTML · CSS</div></div>
+      <div class="skill-row"><span class="label">Frontend</span><div>React · Redux Toolkit · React Native (Expo) · Vite</div></div>
+      <div class="skill-row"><span class="label">Backend</span><div>Node.js · Express · Django REST Framework · Socket.io</div></div>
+      <div class="skill-row"><span class="label">Databases</span><div>MongoDB Atlas · PostgreSQL (Supabase) · SQLite</div></div>
+      <div class="skill-row"><span class="label">Tools</span><div>Git · VS Code · Jest · Vercel · Render</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">Background</span>
+      <h2>About me</h2>
+      <p>I'm a software engineer from Lusaka who likes building things people use every day. I care about apps that keep working on slow or patchy connections, and about code that is tested and documented.</p>
+    </div>
+    <div class="timeline">
+      <div class="entry">
+        <span class="label">2026 – present</span>
+        <div>
+          <h3>IT Intern (industrial attachment)</h3>
+          <p>Center for Information and Communication Technology, University of Zambia</p>
+        </div>
+      </div>
+      <div class="entry">
+        <span class="label">Graduating 2026</span>
+        <div>
+          <h3>BSc Computer Science (Software Engineering)</h3>
+          <p>The University of Zambia · final exams completed, degree award pending</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <span class="label">Contact</span>
+    <h2>Have a project in mind? Let's talk.</h2>
+    <p>I'm available for web development and IT support work. See my code on GitHub or get in touch to discuss your project.</p>
+    <div class="actions">
+      <a class="btn primary" href="https://github.com/john-chola" target="_blank" rel="noopener">github.com/john-chola ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 John Chola · Lusaka, Zambia</div>
+</footer>
+
+<script>
+(function () {
+  var TOTAL = 6, MIN_PER = 4;
+  var pos = TOTAL, serving = 18;
+  var ticket = document.getElementById('ticket');
+  var posEl = document.getElementById('pos');
+  var waitEl = document.getElementById('wait');
+  var servEl = document.getElementById('serving');
+  var dots = document.getElementById('dots');
+  for (var i = 0; i < TOTAL; i++) dots.appendChild(document.createElement('i'));
+
+  function render() {
+    var done = TOTAL - pos;
+    Array.prototype.forEach.call(dots.children, function (d, i) { d.classList.toggle('done', i < done); });
+    servEl.textContent = 'Now serving A-0' + (serving < 10 ? '0' : '') + serving;
+    if (pos === 0) {
+      ticket.classList.add('turn');
+      posEl.textContent = "It's your turn";
+      waitEl.textContent = 'Please go to Room 2';
+    } else {
+      ticket.classList.remove('turn');
+      posEl.textContent = 'You are number ' + pos;
+      var mins = Math.round(pos * MIN_PER + 1);
+      waitEl.textContent = 'about ' + mins + ' minutes';
+    }
+  }
+  render();
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  setInterval(function () {
+    if (pos === 0) { pos = TOTAL; serving = 18; }
+    else { pos--; serving++; }
+    render();
+  }, 2600);
+})();
+</script>
+</body>
+</html>
