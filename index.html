@@ -156,6 +156,9 @@ section { padding-block: 72px; border-top: 1px solid var(--line); }
 .contact { padding-block: 88px; }
 .contact h2 { font-size: clamp(2.2rem, 5.5vw, 3.8rem); font-weight: 800; max-width: 14em; }
 .contact p { color: var(--muted); font-size: 1.1rem; max-width: 34em; margin: 20px 0 0; }
+.contact p.email { color: var(--ink); font-family: var(--mono); font-size: 1.15rem; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; overflow-wrap: anywhere; }
+.copy { font: 600 0.8rem var(--body); padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.copy:hover { border-color: var(--ink); }
 footer { padding-block: 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.9rem; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -181,7 +184,7 @@ footer { padding-block: 28px; border-top: 1px solid var(--line); color: var(--mu
     <div>
       <span class="status">Available for freelance work</span>
       <h1>I build web apps that work for <em>Zambian</em> communities.</h1>
-      <p class="lede">Full-stack web developer and IT support specialist in Lusaka. I've built a charcoal marketplace that works offline and in three languages, and a clinic queue that tells patients exactly how long they'll wait.</p>
+      <p class="lede">Full-stack web developer and IT support specialist in Lusaka. I've built a charcoal marketplace that works offline in three languages, load-shedding alerts for ZESCO areas, and a clinic queue that tells patients how long they'll wait.</p>
       <div class="actions">
         <a class="btn primary" href="#work">See my work</a>
         <a class="btn" href="https://github.com/john-chola" target="_blank" rel="noopener">GitHub profile ↗</a>
@@ -259,6 +262,50 @@ footer { padding-block: 28px; border-top: 1px solid var(--line); color: var(--mu
 
       <article class="project">
         <div>
+          <div class="kind"><span class="label">Web app · 2026</span></div>
+          <h3>Magetsi</h3>
+          <p class="summary">Households see their area's ZESCO load-shedding schedule, get alerts before power goes off and before it comes back, and log real outages with one tap to show how well each area's schedule is kept.</p>
+          <div class="links">
+            <a href="https://john-chola.github.io/Magetsi/" target="_blank" rel="noopener">Live demo ↗</a>
+            <a href="https://github.com/john-chola/Magetsi" target="_blank" rel="noopener">Source code ↗</a>
+          </div>
+        </div>
+        <div>
+          <ul class="features">
+            <li>Push alerts that reach phones even when the app is closed</li>
+            <li>SMS alerts for any phone, with no data needed, through Africa's Talking</li>
+            <li>164 areas across Lusaka, Kitwe, Ndola, Kabwe and Livingstone</li>
+            <li>Reliability stats per area: on-schedule %, extra hours and late restoration</li>
+            <li>Public dashboard comparing every area, with CSV download</li>
+            <li>No npm packages and no build step, so it runs on a low-spec laptop; 64 automated tests</li>
+          </ul>
+          <div class="stack"><span>Node.js</span><span>JavaScript</span><span>SQLite</span><span>Web Push</span><span>SMS API</span><span>PWA</span></div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div>
+          <div class="kind"><span class="label">Android app · 2026</span><span class="tag-team">In development</span></div>
+          <h3>KwachaTrack</h3>
+          <p class="summary">An Android app that reads your MTN MoMo, Airtel Money and Zamtel Kwacha SMS messages and shows where your money goes, with no manual entry.</p>
+          <div class="links">
+            <a href="https://github.com/john-chola/KwachaTrack" target="_blank" rel="noopener">Source code ↗</a>
+          </div>
+        </div>
+        <div>
+          <ul class="features">
+            <li>Turns each mobile money SMS into amount, fee, balance, counterparty and date</li>
+            <li>Sorts spending into categories automatically and learns from your corrections</li>
+            <li>Dashboard with money in, money out, fees and a six-month comparison</li>
+            <li>Privacy first: no internet permission, and an encrypted database on the phone</li>
+            <li>CSV export and a review queue for messages it couldn't read</li>
+          </ul>
+          <div class="stack"><span>Kotlin</span><span>Jetpack Compose</span><span>Room</span><span>SQLCipher</span><span>WorkManager</span><span>GitHub Actions</span></div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div>
           <div class="kind"><span class="label">Mobile app · 2026</span></div>
           <h3>Pact</h3>
           <p class="summary">A mobile app for 7-day accountability sprints in groups of up to five developers. Check in daily, keep your streak, and build alongside friends.</p>
@@ -312,7 +359,8 @@ footer { padding-block: 28px; border-top: 1px solid var(--line); color: var(--mu
         <ul>
           <li>Full-stack web apps with React, Node.js and MongoDB</li>
           <li>REST APIs with login and user roles</li>
-          <li>Real-time features: chat, live dashboards, notifications</li>
+          <li>Real-time features: chat, live dashboards, push and SMS notifications</li>
+          <li>Android and React Native mobile apps</li>
           <li>Bug fixes and new features on existing sites</li>
           <li>Deployment to Vercel and Render</li>
         </ul>
@@ -337,11 +385,12 @@ footer { padding-block: 28px; border-top: 1px solid var(--line); color: var(--mu
       <h2>Skills</h2>
     </div>
     <div class="skills">
-      <div class="skill-row"><span class="label">Languages</span><div>JavaScript · TypeScript · Python · Java · HTML · CSS</div></div>
-      <div class="skill-row"><span class="label">Frontend</span><div>React · Redux Toolkit · React Native (Expo) · Vite</div></div>
+      <div class="skill-row"><span class="label">Languages</span><div>JavaScript · TypeScript · Python · Java · Kotlin · HTML · CSS</div></div>
+      <div class="skill-row"><span class="label">Frontend</span><div>React · Redux Toolkit · Vite · Progressive Web Apps</div></div>
+      <div class="skill-row"><span class="label">Mobile</span><div>Android (Kotlin, Jetpack Compose, Room) · React Native (Expo)</div></div>
       <div class="skill-row"><span class="label">Backend</span><div>Node.js · Express · Django REST Framework · Socket.io</div></div>
       <div class="skill-row"><span class="label">Databases</span><div>MongoDB Atlas · PostgreSQL (Supabase) · SQLite</div></div>
-      <div class="skill-row"><span class="label">Tools</span><div>Git · VS Code · Jest · Vercel · Render</div></div>
+      <div class="skill-row"><span class="label">Tools</span><div>Git · GitHub Actions · VS Code · Android Studio · Jest · Vercel · Render</div></div>
     </div>
   </div>
 </section>
@@ -376,9 +425,12 @@ footer { padding-block: 28px; border-top: 1px solid var(--line); color: var(--mu
   <div class="wrap">
     <span class="label">Contact</span>
     <h2>Have a project in mind? Let's talk.</h2>
-    <p>I'm available for web development and IT support work. See my code on GitHub or get in touch to discuss your project.</p>
+    <p>I'm available for web development and IT support work. Email me or hire me on Upwork to discuss your project.</p>
+    <p class="email">jchola608@gmail.com <button class="copy" id="copy-email" type="button">Copy</button></p>
     <div class="actions">
-      <a class="btn primary" href="https://github.com/john-chola" target="_blank" rel="noopener">github.com/john-chola ↗</a>
+      <a class="btn primary" href="mailto:jchola608@gmail.com">Email me</a>
+      <a class="btn" href="https://www.upwork.com/freelancers/~01ef020f0465f8dcc7" target="_blank" rel="noopener">Hire me on Upwork ↗</a>
+      <a class="btn" href="https://github.com/john-chola" target="_blank" rel="noopener">GitHub ↗</a>
     </div>
   </div>
 </section>
@@ -388,6 +440,15 @@ footer { padding-block: 28px; border-top: 1px solid var(--line); color: var(--mu
 </footer>
 
 <script>
+document.getElementById('copy-email').addEventListener('click', function (e) {
+  var btn = e.currentTarget, addr = 'jchola608@gmail.com';
+  function done(t) { btn.textContent = t; setTimeout(function () { btn.textContent = 'Copy'; }, 1800); }
+  function select() {
+    var r = document.createRange(); r.selectNodeContents(btn.parentNode.firstChild);
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); done('Selected');
+  }
+  try { navigator.clipboard.writeText(addr).then(function () { done('Copied'); }, select); } catch (err) { select(); }
+});
 (function () {
   var TOTAL = 6, MIN_PER = 4;
   var pos = TOTAL, serving = 18;
